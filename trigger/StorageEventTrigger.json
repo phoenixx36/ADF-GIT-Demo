@@ -16,7 +16,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/adlsgen2-file-system/blobs/input/Test123.txt",
+			"blobPathBeginsWith": "/adlsgen2-file-system/blobs/adlsgen2-file-system/Test123.txt",
 			"blobPathEndsWith": ".txt",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Storage/storageAccounts/abiadlsgen2",
