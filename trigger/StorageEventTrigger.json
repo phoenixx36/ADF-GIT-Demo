@@ -2,7 +2,7 @@
 	"name": "StorageEventTrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -16,12 +16,13 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/demo/blobs/input/",
+			"blobPathBeginsWith": "/adlsgen2-file-system/blobs/input/Test123.txt",
 			"blobPathEndsWith": ".txt",
 			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Storage/storageAccounts/myadflearning",
+			"scope": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Storage/storageAccounts/abiadlsgen2",
 			"events": [
-				"Microsoft.Storage.BlobCreated"
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
 			]
 		}
 	}
