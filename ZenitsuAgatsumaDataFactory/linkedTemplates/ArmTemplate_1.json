@@ -70,6 +70,27 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/credential1')]",
+			"type": "Microsoft.DataFactory/factories/credentials",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "ServicePrincipal",
+				"typeProperties": {
+					"tenant": "16b3c013-d300-468d-ac64-7eda0820b6d3",
+					"servicePrincipalId": "Test_Service_Princ_ID",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "Test_Secret_Name"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/default/AzPostgreFlex')]",
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2018-06-01",
@@ -182,6 +203,57 @@
 				"lastPublishTime": "2024-09-30T13:49:39Z"
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Web_Activity_UX_Bug_Repro')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {},
+							"url": "http://dummy.restapiexample.com/api/v1/employees",
+							"authentication": {
+								"resource": "Test_Resource",
+								"credential": {
+									"referenceName": "credential1",
+									"type": "CredentialReference"
+								},
+								"userTenant": "16b3c013-d300-468d-ac64-7eda0820b6d3",
+								"username": "Test_Service_Pric_ID",
+								"password": {
+									"type": "AzureKeyVaultSecret",
+									"store": {
+										"referenceName": "AzureKeyVault1",
+										"type": "LinkedServiceReference"
+									},
+									"secretName": "Test_Secret_Name"
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/credentials/credential1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/sharepoint_pipeline')]",
@@ -368,52 +440,6 @@
 						}
 					}
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Pagination Repro')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Web1",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "GET",
-							"headers": {},
-							"url": "http://dummy.restapiexample.com/api/v1/employees",
-							"authentication": {
-								"type": "ServicePrincipal",
-								"userTenant": "16b3c013-d300-468d-ac64-7eda0820b6d3",
-								"username": "Test_Service_Pric_ID",
-								"resource": "Test_Resource",
-								"password": {
-									"type": "AzureKeyVaultSecret",
-									"store": {
-										"referenceName": "AzureKeyVault1",
-										"type": "LinkedServiceReference"
-									},
-									"secretName": "Test_Secret_Name"
-								}
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		},

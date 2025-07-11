@@ -47,6 +47,10 @@
 			"type": "string",
 			"defaultValue": "https://test.sharepoint.com/"
 		},
+		"HttpServer3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
+		},
 		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
@@ -107,10 +111,6 @@
 				"inosuke.database.windows.net"
 			]
 		},
-		"HttpServer3_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -168,11 +168,11 @@
 					"HttpServer2_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer2_properties_typeProperties_url')]"
 					},
-					"WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
-						"value": "[parameters('WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
-					},
 					"HttpServer3_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer3_properties_typeProperties_url')]"
+					},
+					"WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
 					}
 				}
 			},

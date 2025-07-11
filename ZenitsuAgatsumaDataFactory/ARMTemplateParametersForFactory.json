@@ -35,6 +35,9 @@
 		"HttpServer2_properties_typeProperties_url": {
 			"value": "https://test.sharepoint.com/"
 		},
+		"HttpServer3_properties_typeProperties_url": {
+			"value": "http://dummy.restapiexample.com/api/v1/employees"
+		},
 		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
 			"value": "@triggerBody().fileName"
 		},
@@ -82,9 +85,6 @@
 			"value": [
 				"inosuke.database.windows.net"
 			]
-		},
-		"HttpServer3_properties_typeProperties_url": {
-			"value": "http://dummy.restapiexample.com/api/v1/employees"
 		}
 	}
 }
