@@ -18,12 +18,18 @@
 					"method": "GET",
 					"url": "http://dummy.restapiexample.com/api/v1/employees",
 					"authentication": {
+						"type": "ServicePrincipal",
+						"userTenant": "16b3c013-d300-468d-ac64-7eda0820b6d3",
+						"username": "Test_Service_Pric_ID",
 						"resource": "Test_Resource",
-						"credential": {
-							"referenceName": "credential1",
-							"type": "CredentialReference"
-						},
-						"userTenant": "16b3c013-d300-468d-ac64-7eda0820b6d3"
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "AzureKeyVault1",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "Test_Secret_Name"
+						}
 					}
 				}
 			}
