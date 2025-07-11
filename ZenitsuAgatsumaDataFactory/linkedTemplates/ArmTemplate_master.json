@@ -1,0 +1,241 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ZenitsuAgatsumaDataFactory"
+		},
+		"AzurePostgreSql1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzurePostgreSql1'"
+		},
+		"AzureSqlDatabase_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase'"
+		},
+		"Kamado_The_Storage_Linked_Service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Kamado_The_Storage_Linked_Service'"
+		},
+		"myadflearning_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'myadflearning'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://test.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://PhoenixForceAKV.vault.azure.net/"
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "inosuke.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "SQL-Database"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "abhishekr"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://test.sharepoint.com/"
+		},
+		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"StorageEventTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Storage/storageAccounts/abiadlsgen2"
+		},
+		"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "inosuke.database.windows.net"
+		},
+		"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"type": "secureString"
+		},
+		"WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"type": "secureString"
+		},
+		"AzPostgreFlex_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.DBforPostgreSQL/flexibleServers/azdb4postgresql-flexserver"
+		},
+		"AzPostgreFlex_properties_groupId": {
+			"type": "string",
+			"defaultValue": "postgresqlServer"
+		},
+		"AzPostgreFlex_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"azdb4postgresql-flexserver.postgres.database.azure.com"
+			]
+		},
+		"AzureSqlMI323_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Sql/managedInstances/kakashisqlmi"
+		},
+		"AzureSqlMI323_properties_groupId": {
+			"type": "string",
+			"defaultValue": "managedInstance"
+		},
+		"AzureSqlMI323_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"kakashisqlmi.07224900dec3.database.windows.net"
+			]
+		},
+		"MPESQLDBInoskue_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Sql/servers/inosuke"
+		},
+		"MPESQLDBInoskue_properties_groupId": {
+			"type": "string",
+			"defaultValue": "sqlServer"
+		},
+		"MPESQLDBInoskue_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"inosuke.database.windows.net"
+			]
+		},
+		"HttpServer3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ZenitsuAgatsumaDataFactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzurePostgreSql1_connectionString": {
+						"value": "[parameters('AzurePostgreSql1_connectionString')]"
+					},
+					"AzureSqlDatabase_password": {
+						"value": "[parameters('AzureSqlDatabase_password')]"
+					},
+					"myadflearning_connectionString": {
+						"value": "[parameters('myadflearning_connectionString')]"
+					},
+					"Kamado_The_Storage_Linked_Service_connectionString": {
+						"value": "[parameters('Kamado_The_Storage_Linked_Service_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_userName')]"
+					},
+					"HttpServer2_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer2_properties_typeProperties_url')]"
+					},
+					"WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
+					},
+					"HttpServer3_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer3_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ZenitsuAgatsumaDataFactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzPostgreFlex_properties_privateLinkResourceId": {
+						"value": "[parameters('AzPostgreFlex_properties_privateLinkResourceId')]"
+					},
+					"AzPostgreFlex_properties_groupId": {
+						"value": "[parameters('AzPostgreFlex_properties_groupId')]"
+					},
+					"AzPostgreFlex_properties_fqdns": {
+						"value": "[parameters('AzPostgreFlex_properties_fqdns')]"
+					},
+					"AzureSqlMI323_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureSqlMI323_properties_privateLinkResourceId')]"
+					},
+					"AzureSqlMI323_properties_groupId": {
+						"value": "[parameters('AzureSqlMI323_properties_groupId')]"
+					},
+					"AzureSqlMI323_properties_fqdns": {
+						"value": "[parameters('AzureSqlMI323_properties_fqdns')]"
+					},
+					"MPESQLDBInoskue_properties_privateLinkResourceId": {
+						"value": "[parameters('MPESQLDBInoskue_properties_privateLinkResourceId')]"
+					},
+					"MPESQLDBInoskue_properties_groupId": {
+						"value": "[parameters('MPESQLDBInoskue_properties_groupId')]"
+					},
+					"MPESQLDBInoskue_properties_fqdns": {
+						"value": "[parameters('MPESQLDBInoskue_properties_fqdns')]"
+					},
+					"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
+					},
+					"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
+						"value": "[parameters('StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename')]"
+					},
+					"StorageEventTrigger_properties_typeProperties_scope": {
+						"value": "[parameters('StorageEventTrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ZenitsuAgatsumaDataFactory_ArmTemplate_0')]"
+			]
+		}
+	]
+}

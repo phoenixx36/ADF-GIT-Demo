@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ZenitsuAgatsumaDataFactory"
+		},
+		"AzurePostgreSql1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"Kamado_The_Storage_Linked_Service_connectionString": {
+			"value": ""
+		},
+		"myadflearning_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://test.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://PhoenixForceAKV.vault.azure.net/"
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "inosuke.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "SQL-Database"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "abhishekr"
+		},
+		"HttpServer2_properties_typeProperties_url": {
+			"value": "https://test.sharepoint.com/"
+		},
+		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
+			"value": "@triggerBody().fileName"
+		},
+		"StorageEventTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Storage/storageAccounts/abiadlsgen2"
+		},
+		"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "inosuke.database.windows.net"
+		},
+		"Nezuko-The-Azure-SSIS-IR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		},
+		"WinSCPTestIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		},
+		"AzPostgreFlex_properties_privateLinkResourceId": {
+			"value": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.DBforPostgreSQL/flexibleServers/azdb4postgresql-flexserver"
+		},
+		"AzPostgreFlex_properties_groupId": {
+			"value": "postgresqlServer"
+		},
+		"AzPostgreFlex_properties_fqdns": {
+			"value": [
+				"azdb4postgresql-flexserver.postgres.database.azure.com"
+			]
+		},
+		"AzureSqlMI323_properties_privateLinkResourceId": {
+			"value": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Sql/managedInstances/kakashisqlmi"
+		},
+		"AzureSqlMI323_properties_groupId": {
+			"value": "managedInstance"
+		},
+		"AzureSqlMI323_properties_fqdns": {
+			"value": [
+				"kakashisqlmi.07224900dec3.database.windows.net"
+			]
+		},
+		"MPESQLDBInoskue_properties_privateLinkResourceId": {
+			"value": "/subscriptions/98a4f646-7377-449c-aefa-5fde7c5897c6/resourceGroups/PhoenixForce/providers/Microsoft.Sql/servers/inosuke"
+		},
+		"MPESQLDBInoskue_properties_groupId": {
+			"value": "sqlServer"
+		},
+		"MPESQLDBInoskue_properties_fqdns": {
+			"value": [
+				"inosuke.database.windows.net"
+			]
+		},
+		"HttpServer3_properties_typeProperties_url": {
+			"value": "http://dummy.restapiexample.com/api/v1/employees"
+		}
+	}
+}
