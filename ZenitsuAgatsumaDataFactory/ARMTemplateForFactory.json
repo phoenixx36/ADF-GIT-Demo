@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Kamado_The_Storage_Linked_Service'"
 		},
+		"SapOpenHub1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SapOpenHub1'"
+		},
 		"myadflearning_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'myadflearning'"
@@ -50,6 +54,22 @@
 		"HttpServer3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"SapOpenHub1_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "Choild1"
+		},
+		"SapOpenHub1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
+		},
+		"SapOpenHub1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "Phoenix"
+		},
+		"SapOpenHub1_properties_typeProperties_systemNumber": {
+			"type": "string",
+			"defaultValue": "Test123"
 		},
 		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
 			"type": "string",
@@ -154,6 +174,21 @@
 								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"enableOdbcDiagnosticLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "myadflearning",
+										"type": "LinkedServiceReference"
+									},
+									"path": "demo/odbcdiagnosticlogs"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"typeConversion": true,
@@ -197,8 +232,41 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputFile')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/linkedServices/myadflearning')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pagination_Repro')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {},
+							"url": "http://dummy.restapiexample.com/api/v1/employees"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Script_Task_File_System')]",
@@ -822,6 +890,32 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SapOpenHub1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SapOpenHub",
+				"typeProperties": {
+					"clientId": "[parameters('SapOpenHub1_properties_typeProperties_clientId')]",
+					"userName": "[parameters('SapOpenHub1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SapOpenHub1_password')]"
+					},
+					"server": "[parameters('SapOpenHub1_properties_typeProperties_server')]",
+					"systemNumber": "[parameters('SapOpenHub1_properties_typeProperties_systemNumber')]"
+				},
+				"connectVia": {
+					"referenceName": "Tanjiro-The-Self-Hosted-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/Tanjiro-The-Self-Hosted-IR')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/myadflearning')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -833,6 +927,37 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Scheduled-Pagination')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Pagination_Repro",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 5,
+						"startTime": "2025-07-17T11:30:00",
+						"endTime": "2025-07-17T12:00:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Pagination_Repro')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/StorageEventTrigger')]",
@@ -1050,69 +1175,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Pagination_Repro')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Web1",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "GET",
-							"headers": {},
-							"url": "http://dummy.restapiexample.com/api/v1/employees"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Scheduled-Pagination')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Pagination_Repro",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 5,
-						"startTime": "2025-07-17T11:30:00",
-						"endTime": "2025-07-17T12:00:00",
-						"timeZone": "India Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Pagination_Repro')]"
 			]
 		}
 	]

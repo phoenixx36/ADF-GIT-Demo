@@ -14,6 +14,9 @@
 		"Kamado_The_Storage_Linked_Service_connectionString": {
 			"value": ""
 		},
+		"SapOpenHub1_password": {
+			"value": ""
+		},
 		"myadflearning_connectionString": {
 			"value": ""
 		},
@@ -37,6 +40,18 @@
 		},
 		"HttpServer3_properties_typeProperties_url": {
 			"value": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"SapOpenHub1_properties_typeProperties_clientId": {
+			"value": "Choild1"
+		},
+		"SapOpenHub1_properties_typeProperties_userName": {
+			"value": "admin"
+		},
+		"SapOpenHub1_properties_typeProperties_server": {
+			"value": "Phoenix"
+		},
+		"SapOpenHub1_properties_typeProperties_systemNumber": {
+			"value": "Test123"
 		},
 		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
 			"value": "@triggerBody().fileName"

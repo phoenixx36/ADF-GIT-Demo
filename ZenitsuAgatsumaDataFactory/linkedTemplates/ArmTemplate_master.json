@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Kamado_The_Storage_Linked_Service'"
 		},
+		"SapOpenHub1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SapOpenHub1'"
+		},
 		"myadflearning_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'myadflearning'"
@@ -50,6 +54,22 @@
 		"HttpServer3_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://dummy.restapiexample.com/api/v1/employees"
+		},
+		"SapOpenHub1_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "Choild1"
+		},
+		"SapOpenHub1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
+		},
+		"SapOpenHub1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "Phoenix"
+		},
+		"SapOpenHub1_properties_typeProperties_systemNumber": {
+			"type": "string",
+			"defaultValue": "Test123"
 		},
 		"StorageEventTrigger_properties_ADFRampUpProj1_parameters_filename": {
 			"type": "string",
@@ -191,6 +211,21 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SapOpenHub1_password": {
+						"value": "[parameters('SapOpenHub1_password')]"
+					},
+					"SapOpenHub1_properties_typeProperties_clientId": {
+						"value": "[parameters('SapOpenHub1_properties_typeProperties_clientId')]"
+					},
+					"SapOpenHub1_properties_typeProperties_userName": {
+						"value": "[parameters('SapOpenHub1_properties_typeProperties_userName')]"
+					},
+					"SapOpenHub1_properties_typeProperties_server": {
+						"value": "[parameters('SapOpenHub1_properties_typeProperties_server')]"
+					},
+					"SapOpenHub1_properties_typeProperties_systemNumber": {
+						"value": "[parameters('SapOpenHub1_properties_typeProperties_systemNumber')]"
 					},
 					"AzPostgreFlex_properties_privateLinkResourceId": {
 						"value": "[parameters('AzPostgreFlex_properties_privateLinkResourceId')]"
