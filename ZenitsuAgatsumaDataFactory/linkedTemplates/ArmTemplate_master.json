@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ZenitsuAgatsumaDataFactory"
 		},
+		"AzureMySql1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureMySql1'"
+		},
 		"AzurePostgreSql1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzurePostgreSql1'"
@@ -158,6 +162,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureMySql1_connectionString": {
+						"value": "[parameters('AzureMySql1_connectionString')]"
+					},
 					"AzurePostgreSql1_connectionString": {
 						"value": "[parameters('AzurePostgreSql1_connectionString')]"
 					},
@@ -166,9 +173,6 @@
 					},
 					"myadflearning_connectionString": {
 						"value": "[parameters('myadflearning_connectionString')]"
-					},
-					"Kamado_The_Storage_Linked_Service_connectionString": {
-						"value": "[parameters('Kamado_The_Storage_Linked_Service_connectionString')]"
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
@@ -211,6 +215,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Kamado_The_Storage_Linked_Service_connectionString": {
+						"value": "[parameters('Kamado_The_Storage_Linked_Service_connectionString')]"
 					},
 					"SapOpenHub1_password": {
 						"value": "[parameters('SapOpenHub1_password')]"
